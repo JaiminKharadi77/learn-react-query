@@ -4,7 +4,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Link from "next/link";
 import { QueryClient, QueryClientProvider } from "react-query";
-
+import { ReactQueryDevtools } from "react-query/devtools";
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -44,6 +44,7 @@ export default function RootLayout({ children }) {
             </ul>
           </nav>
           {children}
+          <ReactQueryDevtools position="bottom-right" />
         </QueryClientProvider>
       </body>
     </html>

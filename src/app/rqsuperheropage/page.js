@@ -5,7 +5,7 @@ import { useQuery } from "react-query";
 import axios from "axios";
 
 const fecthSuperHeroes = () => {
-  return axios.get("http://localhost:4000/superheroess");
+  return axios.get("http://localhost:4000/superheroes");
 };
 
 function RQSuperHeroPage() {
