@@ -12,7 +12,9 @@ function RQSuperHeroPage() {
   const { isLoading, data, isError, error, isFetching } = useQuery(
     "super-heroes",
     fecthSuperHeroes,
-    { cacheTime: 5000 }
+    {
+      staleTime: 30000, // api will fetch new data the after 30s
+    }
   );
 
   console.log({ isLoading, isFetching });
