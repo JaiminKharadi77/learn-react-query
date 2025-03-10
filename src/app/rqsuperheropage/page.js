@@ -13,7 +13,9 @@ function RQSuperHeroPage() {
     "super-heroes",
     fecthSuperHeroes,
     {
-      staleTime: 30000, // api will fetch new data the after 30s
+      // staleTime: 30000, // api will fetch new data the after 30s
+      refetchOnMount: true,
+      refetchOnWindowFocus: true,
     }
   );
 
