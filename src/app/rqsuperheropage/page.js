@@ -9,15 +9,10 @@ const fecthSuperHeroes = () => {
 };
 
 function RQSuperHeroPage() {
-  const { isLoading, data, isError, error, isFetching } = useQuery(
+  const { isLoading, data, isError, error, isFetching, refetch } = useQuery(
     "super-heroes",
     fecthSuperHeroes,
-    {
-      // staleTime: 30000, // api will fetch new data the after 30s
-      // refetchOnMount: true,
-      // refetchOnWindowFocus: true,
-      refetchInterval: 2000, // api will be called every 2s
-    }
+    { enabled: false }
   );
 
   console.log({ isLoading, isFetching });
@@ -33,6 +28,7 @@ function RQSuperHeroPage() {
   return (
     <>
       <div>RQSuperHeroPage</div>
+      <button onClick={refetch}>Summon Super heroes</button>
       {data?.data.map((hero) => {
         return <div>{hero.name}</div>;
       })}
