@@ -8,11 +8,19 @@ const fecthSuperHeroes = () => {
   return axios.get("http://localhost:4000/superheroes");
 };
 
+function onSuccess(res) {
+  console.log("Side Effect after Success Api", res);
+}
+
+function onError(err) {
+  console.log("Side Effect after  Api Error", err);
+}
+
 function RQSuperHeroPage() {
   const { isLoading, data, isError, error, isFetching, refetch } = useQuery(
     "super-heroes",
     fecthSuperHeroes,
-    { enabled: false }
+    { onSuccess: onSuccess, onError: onError }
   );
 
   console.log({ isLoading, isFetching });
