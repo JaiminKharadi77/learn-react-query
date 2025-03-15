@@ -20,7 +20,14 @@ function RQSuperHeroPage() {
   const { isLoading, data, isError, error, isFetching, refetch } = useQuery(
     "super-heroes",
     fecthSuperHeroes,
-    { onSuccess: onSuccess, onError: onError }
+    {
+      onSuccess: onSuccess,
+      onError: onError,
+      select: (data) => {
+        const superheroes = data.data.map((hero) => hero.name);
+        return superheroes;
+      },
+    }
   );
 
   console.log({ isLoading, isFetching });
@@ -37,8 +44,8 @@ function RQSuperHeroPage() {
     <>
       <div>RQSuperHeroPage</div>
       <button onClick={refetch}>Summon Super heroes</button>
-      {data?.data.map((hero) => {
-        return <div>{hero.name}</div>;
+      {data?.map((hero) => {
+        return <div>{hero}</div>;
       })}
     </>
   );
