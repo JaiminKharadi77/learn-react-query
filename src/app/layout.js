@@ -5,6 +5,9 @@ import "./globals.css";
 import Link from "next/link";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
