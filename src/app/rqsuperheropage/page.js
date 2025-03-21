@@ -2,6 +2,7 @@
 
 import React, { cache } from "react";
 import { useSuperHeroesData } from "../custom-hooks/useSuperheroesData";
+import { useRouter } from "next/navigation";
 const fecthSuperHeroes = () => {
   return axios.get("http://localhost:4000/superheroes");
 };
@@ -18,10 +19,7 @@ function RQSuperHeroPage() {
   const { isLoading, data, isError, error, isFetching, refetch } =
     useSuperHeroesData(onSuccess, onError);
 
-  console.log({
-    isLoading,
-    isFetching,
-  });
+  const router = useRouter();
 
   if (isLoading) {
     return <h2>Loading...</h2>;
@@ -36,7 +34,14 @@ function RQSuperHeroPage() {
       <div>RQSuperHeroPage</div>
       <button onClick={refetch}>Summon Super heroes</button>
       {data?.map((hero) => {
-        return <div key={hero}>{hero}</div>;
+        return (
+          <div
+            key={hero.id}
+            onClick={() => router.push(`/rqsuperheropage/${hero.id}`)}
+          >
+            {hero.name}
+          </div>
+        );
       })}
     </>
   );
