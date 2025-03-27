@@ -41,5 +41,25 @@
             "id": 6,
             "name": "Phoebe Buffay"
         }
+    ],
+    "users": [
+        {
+            "id": "johndoe@gmail.com",
+            "name": "John Doe"
+        },
+        {
+            "id": "jaimin@gmail.com",
+            "channelId": "learnwithjaimin"
+        }
+    ],
+    "channels": [
+        {
+            "id": "learnwithjaimin",
+            "courses": ["React", "Next", "Tailwind", "TypeScript"]
+        },
+        {
+            "id": "learntocode",
+            "courses": ["JavaScript", "Python", "Java", "C++"]
+        }
     ]
 }

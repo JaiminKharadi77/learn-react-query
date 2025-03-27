@@ -16,7 +16,7 @@ const RqParallelQueries = () => {
 
   return (
     <div>
-      {superheroes?.data?.map((hero) => {
+      {/* {superheroes?.data?.map((hero) => {
         return (
           <div key={hero.id}>
             {hero.name} - {hero.alterEgo}
@@ -28,7 +28,8 @@ const RqParallelQueries = () => {
         return <div key={friend.id}>{friend.name}</div>;
       })}
       <hr />
-      <DynamicParallelComponent heroIds={[1, 3]} />
+      <DynamicParallelComponent heroIds={[1, 3]} /> */}
+      <DependentQueries email="jaimin@gmail.com" />
     </div>
   );
 };
@@ -46,7 +47,42 @@ const DynamicParallelComponent = ({ heroIds }) => {
     })
   );
 
-  console.log({queryResults});
+  console.log({ queryResults });
 
   return <div>Hello</div>;
+};
+
+const DependentQueries = ({ email }) => {
+  const fetchUserByEmail = (email) => {
+    return axios.get(`http://localhost:4000/users/${email}`);
+  };
+
+  const fetchCoursesByChannelId = (channelId) => {
+    return axios.get(`http://localhost:4000/channels/${channelId}`);
+  };
+
+  const { data: user } = useQuery({
+    queryKey: ["user", email],
+    queryFn: () => fetchUserByEmail(email),
+  });
+
+  const channelId = user?.data.channelId;
+
+  const { data: courses } = useQuery({
+    queryKey: ["courses", channelId],
+    queryFn: () => fetchCoursesByChannelId(channelId),
+    enabled: !!channelId,
+  });
+
+  return (
+    <div>
+      <h2>Dependent Queries</h2>
+      <h3>User</h3>
+      {user?.data.name}
+      <h3>Courses</h3>
+      {courses?.data.courses.map((course) => {
+        return <div key={course}>{course}</div>;
+      })}
+    </div>
+  );
 };
